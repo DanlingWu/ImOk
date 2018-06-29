@@ -28,6 +28,8 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	
+
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. 
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
     <!-- Good default declaration:
@@ -46,10 +48,74 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-	    <link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
 
+<style>
+	 #footer{
+	   position: absolute;
+	   bottom: 0;
+	   width: 100%
+	}
+</style>
 		
-		
+<style>
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+</style>
 </head>
 
 <body>
@@ -62,10 +128,11 @@
 
   <div data-role="main" class="ui-content">
     <p>Welcome to ImOK.</p>
-    <a href="#pagetwo">Next</a>
+    <a data-role="button" href="#pagetwo">Next</a>
   </div>
-
-  <div data-role="footer">
+  
+  
+  <div data-role="footer" id="footer">
     <h1>Footer Text</h1>
   </div>
 </div> 
@@ -84,7 +151,41 @@
 	<button type="button" >Emergency</button>
   </div>
 
-  <div data-role="footer">
+ <!--
+	<a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">popupCloseRight</a>
+
+ 
+  <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+<p>I have a close button at the top right corner with simple HTML markup.</p>
+</div> 
+
+
+<a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Basic Popup</a>
+<div data-role="popup" id="popupBasic">
+<p>This is a completely basic popup, no options set.</p>
+</div>
+-->
+<div class="popup" data-role="popup" id="popupStatus" data-position-to="window" data-corners="true" data-dismissible="false" data-history="false">
+    <div data-role="content" id="popupStatus" class="ui-content" style="max-width:280px">
+		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <h3>
+				<p>
+					Please go to setting to set your preferences!
+				</p>
+			</h3>
+     </div>
+</div> 
+
+ <script> 
+  $(document).on("pageshow", "#pagetwo", function () {
+    setTimeout(function () {
+        $("#popupStatus").popup("open");
+    }, 100);
+});
+ </script>  
+ 
+  <div data-role="footer" id="footer">
     <h1><a href="#pagethree">Setting</a></h1>
   </div>
 </div> 
@@ -127,7 +228,7 @@
     <a href="#pagetwo">Go to Page Two</a>
   </div>
 
-  <div data-role="footer">
+  <div data-role="footer" id="footer">
     <h1>Done</h1>
   </div>
 </div> 
