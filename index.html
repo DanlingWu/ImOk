@@ -50,6 +50,7 @@
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
 
+	
 <style>
 	 #footer{
 	   position: absolute;
@@ -141,31 +142,18 @@
 <div data-role="page" id="pagetwo">
   <div data-role="header">
     <h1>Check In</h1>
-  </div>
+</div>
 
-  <div data-role="main" class="ui-content">
-    <p>This is Page Two. If you click on the link below, it will take you to Page One.</p>
-    
+<div data-role="main" class="ui-content">
+	<p>This is Page Two. If you click on the link below, it will take you to Page One.</p>
+
+
 	<button type="button" >Check in</button>
 	<br>
 	<button type="button" >Emergency</button>
-  </div>
-
- <!--
-	<a href="#popupCloseRight" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">popupCloseRight</a>
+</div>
 
  
-  <div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
-    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-<p>I have a close button at the top right corner with simple HTML markup.</p>
-</div> 
-
-
-<a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Basic Popup</a>
-<div data-role="popup" id="popupBasic">
-<p>This is a completely basic popup, no options set.</p>
-</div>
--->
 <div class="popup" data-role="popup" id="popupStatus" data-position-to="window" data-corners="true" data-dismissible="false" data-history="false">
     <div data-role="content" id="popupStatus" class="ui-content" style="max-width:280px">
 		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -199,12 +187,16 @@
   <div data-role="main" class="ui-content">
     <p>Please set your preferences!</p>
 	<form action="">
-		Check in messege:<br>
-		<input type="text" name="messages">
-		Contact email:<br>
-		<input type="text" name="email">
-		
+		<h3>
+			Check in messege:<br>
+			<input type="text" name="messages">
+			Contact email:<br>
+			<input type="text" name="email">
+		</h3>
 		<h2>send your GPS</h2>
+		
+		<label for="radio-choice-3">never</label>
+		<input type="radio" name="radio-choice-0" id="radio-choice-3">
 		
 		<label for="radio-choice-0">once a day</label>
 		<input type="radio" name="radio-choice-0" id="radio-choice-0">
@@ -216,10 +208,12 @@
 		<input type="radio" name="radio-choice-0" id="radio-choice-2">
 		
 		<h2>Emergency</h2>
-		Emergency messege:<br>
-		<input type="text" name="messages">
-		Emergency contact email:<br>
-		<input type="text" name="number">
+			<h3>
+				Emergency messege:
+				<input type="text" name="messages">
+				Emergency contact email:
+				<input type="text" name="number">
+			</h3>
 		<h4>Please note GPS will always be sent for emergency!</h4>
 			
 	<br><br>
@@ -232,7 +226,7 @@
     <h1>Done</h1>
   </div>
 </div> 
-  
+	 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
         app.initialize();
