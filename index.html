@@ -51,14 +51,9 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
 
 	
-<style>
-	 #footer{
-	   position: absolute;
-	   bottom: 0;
-	   width: 100%
-	}
-</style>
-		
+
+
+<!--		
 <style>
 /* Popup container - can be anything you want */
 .popup {
@@ -117,6 +112,7 @@
     to {opacity:1 ;}
 }
 </style>
+-->
 </head>
 
 <body>
@@ -147,13 +143,14 @@
 <div data-role="main" class="ui-content">
 	<p>This is Page Two. If you click on the link below, it will take you to Page One.</p>
 
-
-	<button type="button" >Check in</button>
+	<button id="check-in-btn" type="button" class="icon_close hold_trigger">Check in</button>
 	<br>
 	<button type="button" >Emergency</button>
 </div>
 
- 
+<script>
+
+</script> 
 <div class="popup" data-role="popup" id="popupStatus" data-position-to="window" data-corners="true" data-dismissible="false" data-history="false">
     <div data-role="content" id="popupStatus" class="ui-content" style="max-width:280px">
 		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -164,15 +161,6 @@
 			</h3>
      </div>
 </div> 
-
- <script> 
-  $(document).on("pageshow", "#pagetwo", function () {
-    setTimeout(function () {
-        $("#popupStatus").popup("open");
-    }, 100);
-});
- </script>  
- 
   <div data-role="footer" id="footer">
     <h1><a href="#pagethree">Setting</a></h1>
   </div>
@@ -226,10 +214,40 @@
     <h1>Done</h1>
   </div>
 </div> 
-	 
+<script> 
+  $(document).on("pageshow", "#pagetwo", function () {
+    setTimeout(function () {
+        $("#popupStatus").popup("open");
+    }, 100);
+});
+ </script> 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
-        app.initialize();
+        //app.initialize();
+
+	$(document).ready(function(){
+      	var timeout_id = 0,
+		hold_time = 1000,
+		hold_trigger = $('.hold_trigger');
+		var count = 5;
+		hold_trigger.mousedown(function() {
+			for(count=5; count>=0; count--){
+				setTimeout(function (){
+					// Something you want delayed.
+					$("#check-in-btn").text("holding..."+count).button("refresh");
+					console.log($("#check-in-btn").text());
+				}, 1000);
+			}
+			console.log('more than 5 seconds');
+		}).bind('mouseup mouseleave', function() {
+		    $("#check-in-btn").text("Check in").button("refresh");
+			count = 5;
+		});
+
+		function menu_toggle() {
+		    $('.spinner').addClass('active');
+		}
+});
     </script>
 	
 </body>
