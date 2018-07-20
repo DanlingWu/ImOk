@@ -49,15 +49,25 @@
       <span class="text" id="button-text">Hold Me!</span>
       <span class="spinner"></span>
     </button>
-</span>
-	<button id="check-in-btn" type="button" class="icon_close hold_trigger">Check in</button>
-	<br>
-	<button type="button" >Emergency</button>
+ </span>
+
+  <a href="#popupCloseRight" data-rel="popup" style="margin:30px auto; text-align:center; display:block; width:200px;" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="check-in-btn">Check in</a>
+
+  <div data-role="popup" id="popupCloseRight" class="ui-content">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+      <p>Your Check in messages has been sent.</p>
+  </div>
+
+  <br>
+
+  <a href="#popupCloseRight" data-rel="popup" style="margin:30px auto; text-align:center; display:block; width:200px;" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="emergency-btn">Emergency</a>
+
+  <div data-role="popup" id="emergency-btn" class="ui-content">
+    <a href="#popupCloseRight" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+      <p>Your emergency messages has been sent.</p>
+  </div>
 </div>
 
-<script>
-
-</script>
 <div class="popup" data-role="popup" id="popupStatus" data-position-to="window" data-corners="true" data-dismissible="false" data-history="false">
     <div data-role="content" id="popupStatus" class="ui-content" style="max-width:280px">
 		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
@@ -66,7 +76,7 @@
 					Please go to setting to set your preferences!
 				</p>
 			</h3>
-     </div>
+    </div>
 </div>
   <div data-role="footer" id="footer" data-position="fixed">
     <h1><a href="#pagethree">Setting</a></h1>
@@ -76,7 +86,7 @@
 
 <!-- Third page: Setting -->
 <div data-role="page" id="pagethree">
-  <div data-role="header">
+  <div data-role="header" data-add-back-btn="true">
     <h1>Setting</h1>
   </div>
 
@@ -113,13 +123,9 @@
 		<h4>Please note GPS will always be sent for emergency!</h4>
 
 	<br><br>
-  <input type="submit" value="Save" id="setting-ave-btn">
+  <input type="submit" value="Save" id="setting-save-btn">
 </form>
     <a href="#pagetwo">Go to Page Two</a>
-  </div>
-
-  <div data-role="footer" id="footer" data-position="fixed">
-    <h1>Done</h1>
   </div>
 </div>
 
@@ -128,14 +134,20 @@
     $(document).on("pageshow", "#pagetwo", function () {
       /** check if the app has been setup already
       if not then show the popuptext**/
-      setTimeout(function () {
-          $("#popupStatus").popup("open");
-      }, 100);
+      if (!localStorage.getItem('isSetup')) {
+        setTimeout(function () {
+            $("#popupStatus").popup("open");
+        }, 100);
+    }
   });
   </script>
   <script>
       $(document).ready(function(){
-       
+         //press save settings Button
+         $('#setting-save-btn').on('click', function(){
+           localStorage.setItem("isSetup", true);
+          // alert(localStorage.getItem("isSetup"));
+         });
       });
   </script>
   <script type="text/javascript" src="cordova.js"></script>
