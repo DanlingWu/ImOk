@@ -22,14 +22,14 @@
 
 
 <!-- first page: set up -->
-<div data-role="page" id="pageone">
+<div data-role="page" id="welcome-page">
   <div data-role="header">
     <h1>Set Up</h1>
   </div>
 
   <div data-role="main" class="ui-content">
     <p>Welcome to ImOK.</p>
-    <a data-role="button" href="#pagetwo">Next</a>
+    <a data-role="button" href="#check-in-page">Next</a>
   </div>
 
   <div data-role="footer" id="footer" data-position="fixed">
@@ -39,7 +39,7 @@
 
 
 <!-- second page: check in -->
-<div data-role="page" id="pagetwo">
+<div data-role="page" id="check-in-page">
   <div data-role="header">
     <h1>Check In</h1>
 </div>
@@ -75,58 +75,58 @@
     </div>
 </div>
   <div data-role="footer" id="footer" data-position="fixed">
-    <h1><a href="#pagethree">Setting</a></h1>
+    <h1><a href="#setting-page">Setting</a></h1>
   </div>
 </div>
 
 
 <!-- Third page: Setting -->
-<div data-role="page" id="pagethree">
+<div data-role="page" id="setting-page">
   <div data-role="header" data-add-back-btn="true">
     <h1>Setting</h1>
   </div>
 
   <div data-role="main" class="ui-content">
     <p>Please set your preferences!</p>
-	<form action="">
+	<form action="" id="setting-form">
 		<h3>
-			Check in messege:<br>
-			<input type="text" name="messages">
+			Check in message:<br>
+			<input type="text" name="check-in-message" id="check-in-message" required>
 			Contact email:<br>
-			<input type="text" name="email">
+			<input type="email" name="check-in-email" id="check-in-email" required>
 		</h3>
 		<h2>send your GPS</h2>
 
-		<label for="radio-choice-3">never</label>
-		<input type="radio" name="radio-choice-0" id="radio-choice-3">
+		<label for="send-gps-0">never</label>
+		<input type="radio" name="send-gps" id="send-gps-0" value="never" required>
 
-		<label for="radio-choice-0">once a day</label>
-		<input type="radio" name="radio-choice-0" id="radio-choice-0">
+		<label for="send-gps-1">once a day</label>
+		<input type="radio" name="send-gps" id="send-gps-1" value="once-a-day" required>
 
-		<label for="radio-choice-1">every other day</label>
-		<input type="radio" name="radio-choice-0" id="radio-choice-1">
+		<label for="send-gps-2">every other day</label>
+		<input type="radio" name="send-gps" id="send-gps-2" value="every-other-day" required>
 
-		<label for="radio-choice-2">always</label>
-		<input type="radio" name="radio-choice-0" id="radio-choice-2">
+		<label for="send-gps-3">always</label>
+		<input type="radio" name="send-gps" id="send-gps-3" value="always" required>
 
 		<h2>Emergency</h2>
 			<h3>
-				Emergency messege:
-				<input type="text" name="messages">
+				Emergency message:
+				<input type="text" name="emergency-messages" id="emergency-messages" required>
 				Emergency contact email:
-				<input type="text" name="number">
+				<input type="text" name="emergency-email" id="emergency-email" required>
 			</h3>
 		<h4>Please note GPS will always be sent for emergency!</h4>
 
 	<br><br>
-  <input type="submit" value="Save" id="setting-save-btn">
+  <input type="submit" value="Save" id="save-setting-btn">
 </form>
   </div>
 </div>
 
 <!-- end of all pages -->
   <script>
-    $(document).on("pageshow", "#pagetwo", function () {
+    $(document).on("pageshow", "#check-in-page", function () {
       /** check if the app has been setup already
       if not then show the popuptext**/
       if (!localStorage.getItem('isSetup')) {
@@ -136,16 +136,8 @@
     }
   });
   </script>
-  <script>
-      $(document).ready(function(){
-         //press save settings Button
-         $('#setting-save-btn').on('click', function(){
-           localStorage.setItem("isSetup", true);
-          // alert(localStorage.getItem("isSetup"));
-         });
-      });
-  </script>
-  <script type="text/javascript" src="cordova.js"></script>
+
+<!--  <script type="text/javascript" src="cordova.js"></script> -->
   <script type="text/javascript" src="js/index.js"></script>
 
 </body>
