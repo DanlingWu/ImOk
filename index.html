@@ -12,6 +12,8 @@
 
 	<script src="js/jquery-mobile/jquery.min.js"></script>
   <script src="js/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
+  <script type="text/javascript" src="js/server.js"></script>
+
   <link rel="stylesheet" type="text/css" href="css/themes/default/jquery.mobile-1.4.5.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
 
@@ -44,26 +46,20 @@
 
 <div data-role="main" class="ui-content">
 	<p>This is Page Two. If you click on the link below, it will take you to Page One.</p>
-  <span class="">
-    <button class="icon_close hold_trigger">
-      <span class="text" id="button-text">Hold Me!</span>
-      <span class="spinner"></span>
-    </button>
- </span>
 
   <a href="#popupCloseRight" data-rel="popup" style="margin:30px auto; text-align:center; display:block; width:200px;" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="check-in-btn">Check in</a>
 
-  <div data-role="popup" id="popupCloseRight" class="ui-content">
+  <div data-role="popup" id="popupCloseRight" data-overlay-theme="a" class="ui-content">
     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
       <p>Your Check in messages has been sent.</p>
   </div>
 
   <br>
 
-  <a href="#popupCloseRight" data-rel="popup" style="margin:30px auto; text-align:center; display:block; width:200px;" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="emergency-btn">Emergency</a>
+  <a href="#emergency-btn" data-rel="popup" style="margin:30px auto; text-align:center; display:block; width:200px;" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Emergency</a>
 
-  <div data-role="popup" id="emergency-btn" class="ui-content">
-    <a href="#popupCloseRight" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+  <div data-role="popup" id="emergency-btn" data-overlay-theme="a" class="ui-content">
+    <a href="#emergency-btn" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
       <p>Your emergency messages has been sent.</p>
   </div>
 </div>
@@ -152,6 +148,7 @@
   </script>
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
+
 </body>
 
 </html>
