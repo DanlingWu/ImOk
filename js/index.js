@@ -5,7 +5,7 @@
   }
 
   $(document).ready(function(){
-
+    //checking the setup, if setup, then fill the settingPage form.
     if (localStorage.getItem('isSetup')) {
       var serialized = localStorage.getItem('settings-data');
 
@@ -23,23 +23,43 @@
     }
 
     $('#save-setting-btn').click(function(){
-      alert($('form').serialize());
       localStorage.setItem("settings-data", $('form').serialize());
       localStorage.setItem("isSetup", true);
 
     });
 
      $('#check-in-btn').click(function(){
-       ///sa
-       serverCheckIn('foo');
+       var result = connectServer();
+
+       if(result){
+         // success msg sent
+         if(localStorage.isSetup === 'true'){
+             var datasent = serverCheckIn(localStorage.getItem('settings-data'));
+             if(datasent != null){
+               if($('#send-gps-yes').is(':checked')){
+                 saveGPS();
+               }
+              $('#check-in-success').popup('open');
+            }else {
+              alert("Sorry, the server didn't respond.");
+            }
+
+         }else {
+           $(':mobile-pagecontainer').pagecontainer('change', '#setting-page');
+         }
+
+       }else{
+         alert('Sorry, can not connect!')
+       }
      });
     // onSuccess Callback
 // This method accepts a Position object, which contains the
 // current GPS coordinates
 //
 function saveGPS(){
-  console.log('in save GPS');
+  console.log('GPS');
   var onSuccess = function(position) {
+/*
       console.log('Latitude: '          + position.coords.latitude          + '\n' +
             'Longitude: '         + position.coords.longitude         + '\n' +
             'Altitude: '          + position.coords.altitude          + '\n' +
@@ -47,10 +67,12 @@ function saveGPS(){
             'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
             'Heading: '           + position.coords.heading           + '\n' +
             'Speed: '             + position.coords.speed             + '\n' +
-            'Timestamp: '         + position.timestamp                + '\n');
+            'Timestamp: '         + position.timestamp                + '\n');*/
             // save location
             localStorage.setItem('Latitude', position.coords.latitude);
             localStorage.setItem('Longitude', position.coords.longitude);
+            //unix time in miliseconds.
+            localStorage.setItem('GPSTimeStamp', new Date(position.timestamp));
 
   };
 
