@@ -34,12 +34,38 @@
        if(result){
          // success msg sent
          if(localStorage.isSetup === 'true'){
-             var datasent = serverCheckIn(localStorage.getItem('settings-data'));
-             if(datasent != null){
+             var setupSent = serverSendSettings(localStorage.getItem('settings-data'));
+             if(setupSent != null){
+               checkin = serverCheckIn();
                if($('#send-gps-yes').is(':checked')){
-                 saveGPS();
+                 doSendGPS();
                }
               $('#check-in-success').popup('open');
+            }else {
+              alert("Sorry, the server didn't respond.");
+            }
+
+         }else {
+           $(':mobile-pagecontainer').pagecontainer('change', '#setting-page');
+         }
+
+       }else{
+         alert('Sorry, can not connect!')
+       }
+     });
+
+     $('#emergency-btn').click(function(){
+       var result = connectServer();
+
+       if(result){
+         // success msg sent
+         if(localStorage.isSetup === 'true'){
+             var setupSent = serverSendSettings(localStorage.getItem('settings-data'));
+             if(setupSent != null){
+               emergencyCheckIn = serverEmergencyCheckIn();
+               doSendGPS();
+
+              $('#emergency-check-in-success').popup('open');
             }else {
               alert("Sorry, the server didn't respond.");
             }
@@ -56,6 +82,14 @@
 // This method accepts a Position object, which contains the
 // current GPS coordinates
 //
+function doSendGPS(){
+  saveGPS();
+  serverSendGPS(
+    localStorage.getItem('Latitude'),
+    localStorage.getItem('Longitude'),
+    localStorage.getItem('GPSTimeStamp')
+  );
+}
 function saveGPS(){
   console.log('GPS');
   var onSuccess = function(position) {
