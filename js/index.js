@@ -3,7 +3,14 @@
   function onDeviceReady(){
     console.log("Device ready...")
   }
+    //checking the setup, if setup, then first page is check in page, otherwise welcome page.
+  $(document).on('pagebeforeshow', '#welcome-page', function (e) {
+        if(localStorage.getItem('isSetup')==='true'){
+          $("body").pagecontainer("change", "#check-in-page", {
 
+          });
+        }
+      } );
   $(document).ready(function(){
     //checking the setup, if setup, then fill the settingPage form.
     if (localStorage.getItem('isSetup')) {
@@ -22,10 +29,13 @@
       });
     }
 
-    $('#save-setting-btn').click(function(){
+    $('#save-setting-btn').click(function(event){
+      event.preventDefault();
       localStorage.setItem("settings-data", $('form').serialize());
       localStorage.setItem("isSetup", true);
+      $("body").pagecontainer("change", "#check-in-page", {
 
+      });
     });
 
      $('#check-in-btn').click(function(){
