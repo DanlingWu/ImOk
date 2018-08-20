@@ -25,6 +25,9 @@ function serverSendSettings(data){
 }
 function serverCheckIn(){
   if(server){
+    $.post('http://localhost/im-ok/',localStorage.getItem('settings-data'),function(data){
+      console.log(data);
+    });
       return '{"result":"success"}';
   }else{
     return null;

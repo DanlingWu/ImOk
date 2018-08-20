@@ -46,10 +46,16 @@
          if(localStorage.isSetup === 'true'){
              var setupSent = serverSendSettings(localStorage.getItem('settings-data'));
              if(setupSent != null){
-               checkin = serverCheckIn();
                if($('#send-gps-yes').is(':checked')){
                  doSendGPS();
+                 $('#latitude').val(localStorage.getItem('Latitude'));
+                 $('#longitude').val(localStorage.getItem('Longitude'));
                }
+               else{
+                 $('#latitude').val('');
+                 $('#longitude').val('');
+               }
+               checkin = serverCheckIn();
               $('#check-in-success').popup('open');
             }else {
               alert("Sorry, the server didn't respond.");
